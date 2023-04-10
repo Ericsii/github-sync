@@ -1,0 +1,21 @@
+name: sync2coding
+
+on:
+  push:
+  schedule:
+    - cron: '1 17 * * *'
+
+jobs:
+  git-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: rm_hardware_driver-sync
+        uses: wei/git-sync@v3
+        with:
+          source_repo: "https://e.coding.net/itlkineticpanda/23chaoduiitlkineticpanda/rm_hardware_driver.git"
+          source_branch: "refs/remotes/source/*"
+          destination_repo: "Ericsii/rm_hardware_driver"
+          destination_branch: "refs/heads/*"
+          # ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }} # optional
+          # source_ssh_private_key: ${{ secrets.SOURCE_SSH_PRIVATE_KEY }} # optional, will override `SSH_PRIVATE_KEY`
+          destination_ssh_private_key: ${{ secrets.DESTINATION_SSH_PRIVATE_KEY }} # optional, will override `SSH_PRIVATE_KEY`
